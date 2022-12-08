@@ -1,5 +1,8 @@
 package com.example.cinema;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.net.ssl.SSLException;
 import java.sql.*;
 
@@ -82,6 +85,30 @@ public class DataBase {
             e.printStackTrace();
         }
         return "Eroare DB register";
+    }
+    public ObservableList<Movie> getListOfMoviesDB(){
+        ObservableList<Movie> list = FXCollections.observableArrayList();
+        try{
+            String sql = "SELECT * FROM film";
+            // sau prepareCall
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+            Movie movie;
+            while(result.next()){
+                movie = new Movie(result.getString("titlu"),
+                                  result.getString("descriere"),
+                                  result.getString("durata"),
+                                  result.getString("gen"),
+                                  result.getString("clasificare"),
+                                  result.getString("limba_dublare")
+                                 );
+                list.add(movie);
+            }
+            // vezi daca trebuie prepare close
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
     }
     public String getDB_URL() {
         return DB_URL;

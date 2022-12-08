@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.sql.Driver;
 
+import static com.example.cinema.Data.dataEmail;
+
 public class ControllerSignIn {
     @FXML
     private TextField SignInEmail_tf;
@@ -43,7 +45,14 @@ public class ControllerSignIn {
     public void handleSignInHaveAccount_hlnk() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
         Stage window = (Stage) SignInHaveAccount_hlnk.getScene().getWindow();
+        window.setTitle("Sign Up");
         window.setScene(new Scene(root, 700, 500));
+    }
+    public void openAdminInterface() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("AdminInterface.fxml"));
+        Stage window = (Stage) SignIn_btn.getScene().getWindow();
+        window.setTitle("Admin Interface");
+        window.setScene(new Scene(root, 1200, 700));
     }
 
     public void SignInDb() {
@@ -62,6 +71,7 @@ public class ControllerSignIn {
             } else {
                 user = new User(email, password);                   // user posibil valid
                 String messageFromDB = user.doLogin();
+                System.out.println(messageFromDB);
                 if (messageFromDB.equals("Logat cu succes!")) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Message");
@@ -74,7 +84,10 @@ public class ControllerSignIn {
                     alert.setHeaderText(null);
                     alert.setContentText("ADMIN Succesfully Login!");
                     alert.showAndWait();
-                } else if (messageFromDB.equals("Date de logare incorecte!")) {
+                    dataEmail = email;
+                    openAdminInterface();
+
+                } else if (messageFromDB.equals("Logare invalida!")) {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);

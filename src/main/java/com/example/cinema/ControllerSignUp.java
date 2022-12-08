@@ -37,6 +37,7 @@ public class ControllerSignUp {
     public void handleSignInHaveAccount_hlnk() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Stage window = (Stage) SignInHaveAccount_hlnk.getScene().getWindow();
+        window.setTitle("Sign In");
         window.setScene(new Scene(root, 700, 500));
     }
 
