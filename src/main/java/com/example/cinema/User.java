@@ -34,15 +34,6 @@ public class User {
         this.password = password;
         this.isAdmin = 0;
     }
-    public boolean isUserRegistred(){
-        // SCOASA DIN UZ
-        DataBase DB = new DataBase();
-        DB.connectToDB();               /// FOARTE IMPORTANT!!!!!!
-        if (DB.checkUser(email, password)){
-            return true;
-        }
-        return false;
-    }
     public String doLogin(){
         // functie care comunica cu clasa Database si apoi chiar cu baza de date
         DataBase DB = new DataBase();

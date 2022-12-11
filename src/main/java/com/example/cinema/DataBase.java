@@ -13,8 +13,10 @@ public class DataBase {
     final String PASSWORD = "";
     private Connection connect;
     private PreparedStatement prepare;
+    private PreparedStatement prepare2;
     private ResultSet result;
     private CallableStatement cstmt;
+    private Statement statement;
     public void connectToDB(){
         // functie care conecteaza la baza de date
         try {
@@ -23,23 +25,6 @@ public class DataBase {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
-    public boolean checkUser(String email, String password){
-        // SCOASA DIN UZ
-        // verifica daca un user se afla in baza de date
-        try{
-            String sql = "SELECT * FROM users WHERE email = ? and password = ?";
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1,email);
-            prepare.setString(2,password);
-            result = prepare.executeQuery();
-            if(result.next())
-                return true;       // user prezent in DB
-
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return false;           // user inexistent
     }
     public String login(String email, String password){
         // functie care verifica daca un user/admin se afla in baza de date
@@ -109,6 +94,45 @@ public class DataBase {
             e.printStackTrace();
         }
         return list;
+    }
+    public int insertMovieDB(Movie movie){
+        int code = -1;
+        /*
+            code = 0  => filmul exista in baza de date
+            code = 1  => filmul a fost introdus in BD cu succes
+        */
+        try{
+            String sql1 = "SELECT titlu FROM film WHERE titlu = (?)";
+            String sql2 = "INSERT INTO film (titlu, descriere, durata, gen, clasificare, limba_dublare) VALUES (?,?,?,?,?,?)";
+
+            // se verifica daca nu cumva exista un film in BD cu acest nume
+            prepare = connect.prepareStatement(sql1);
+            prepare.setString(1, movie.getTitle());
+            result = prepare.executeQuery();
+            if(result.next()){
+
+                code = 0;
+            } else {
+                //se introduce filmul in BD
+                prepare2 = connect.prepareStatement(sql2);
+                prepare2.setString(1, movie.getTitle());
+                prepare2.setString(2, movie.getDescription());
+                prepare2.setString(3, movie.getRuntime());
+                prepare2.setString(4, movie.getGenre());
+                prepare2.setString(5, movie.getAgeRestrictions());
+                prepare2.setString(6, movie.getLanguage());
+                int nrRowAffected = prepare2.executeUpdate();
+                if(nrRowAffected != 0){
+                    code = 1;   // filmul a fost introdus in BD cu succes
+                }
+                System.out.println(nrRowAffected);
+                prepare2.close();// atentie aici. Nu inchidem ceva ce nu am initializat
+            }
+            prepare.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return code;
     }
     public String getDB_URL() {
         return DB_URL;

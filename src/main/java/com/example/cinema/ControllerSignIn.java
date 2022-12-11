@@ -52,6 +52,7 @@ public class ControllerSignIn {
         Parent root = FXMLLoader.load(getClass().getResource("AdminInterface.fxml"));
         Stage window = (Stage) SignIn_btn.getScene().getWindow();
         window.setTitle("Admin Interface");
+        window.setResizable(false);
         window.setScene(new Scene(root, 1200, 700));
     }
 
@@ -71,7 +72,7 @@ public class ControllerSignIn {
             } else {
                 user = new User(email, password);                   // user posibil valid
                 String messageFromDB = user.doLogin();
-                System.out.println(messageFromDB);
+                System.out.println(messageFromDB);                  ///
                 if (messageFromDB.equals("Logat cu succes!")) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Message");
