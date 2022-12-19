@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,10 +19,10 @@
                <children>
                   <Label layoutX="44.0" layoutY="28.0" text="Welcome!" textAlignment="CENTER" textFill="WHITE" />
                   <Label fx:id="usernameTextField" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="55.0" prefHeight="18.0" prefWidth="135.0" text="Username" textAlignment="CENTER" textFill="WHITE" />
-                  <Button fx:id="screeningBtn" layoutX="18.0" layoutY="320.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Screening" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="306.0" />
+                  <Button fx:id="screeningBtn" layoutX="18.0" layoutY="320.0" mnemonicParsing="false" onAction="#viewScreeningForm" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Screening" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="306.0" />
                   <Button fx:id="dasboardBtn" layoutX="21.0" layoutY="195.0" mnemonicParsing="false" onAction="#viewDashboardForm" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Dashboard" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="195.0" />
                   <Button fx:id="filmsBtn" layoutX="20.0" layoutY="229.0" mnemonicParsing="false" onAction="#viewFilmsForm" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Films" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="232.0" />
-                  <Button fx:id="cinemaRoomsBtn" layoutX="21.0" layoutY="268.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Cinema Rooms" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="269.0" />
+                  <Button fx:id="cinemaRoomsBtn" layoutX="21.0" layoutY="268.0" mnemonicParsing="false" onAction="#viewRoomsForm" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Cinema Rooms" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="269.0" />
                   <Button fx:id="seatsBtn" layoutX="18.0" layoutY="345.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" styleClass="nav-btn" stylesheets="@AdminInterface.css" text="Seats" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="343.0" />
                   <Button fx:id="signOutBtn" layoutX="38.0" layoutY="661.0" mnemonicParsing="false" onAction="#logOut" styleClass="signOut-btn" stylesheets="@AdminInterface.css" text="Sign Out" />
                </children>
@@ -30,18 +31,18 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="dasboard_form" prefHeight="700.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="dasboard_form" prefHeight="700.0" prefWidth="860.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="23.0" layoutY="19.0" prefHeight="188.0" prefWidth="1022.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="498.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="158.0" prefWidth="322.0" styleClass="card1" stylesheets="@AdminInterface.css" AnchorPane.leftAnchor="14.0">
                                  <children>
-                                    <Label fx:id="dashboard_ScreeningToday" layoutX="109.0" layoutY="109.0" text="Number of screening today" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
+                                    <Label layoutX="109.0" layoutY="109.0" text="Number of screening today" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="dashboard_" layoutX="202.0" layoutY="23.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
+                                    <Label fx:id="dashboard_ScreeningToday" layoutX="202.0" layoutY="23.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -50,12 +51,12 @@
                               </AnchorPane>
                               <AnchorPane layoutX="384.0" layoutY="15.0" prefHeight="158.0" prefWidth="322.0" styleClass="card2" stylesheets="@AdminInterface.css" AnchorPane.leftAnchor="350.0">
                                  <children>
-                                    <Label fx:id="dashboard_availableMovies" layoutX="129.0" layoutY="108.0" text="Available Movies" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
+                                    <Label layoutX="129.0" layoutY="108.0" text="Available Movies" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="203.0" layoutY="14.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
+                                    <Label fx:id="dashboard_availableMovies" layoutX="203.0" layoutY="14.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -64,12 +65,12 @@
                               </AnchorPane>
                               <AnchorPane layoutX="738.0" layoutY="15.0" prefHeight="158.0" prefWidth="322.0" styleClass="card3" stylesheets="@AdminInterface.css" AnchorPane.leftAnchor="686.0" AnchorPane.rightAnchor="14.0">
                                  <children>
-                                    <Label fx:id="dashboard_totalIncome" layoutX="179.0" layoutY="108.0" text="Total Income" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
+                                    <Label layoutX="179.0" layoutY="108.0" text="Total Income" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="213.0" layoutY="24.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
+                                    <Label fx:id="dashboard_totalIncome" layoutX="213.0" layoutY="24.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -90,16 +91,16 @@
                               <TextField fx:id="films_ageRestriction" layoutX="92.0" layoutY="440.0" AnchorPane.rightAnchor="14.400000000000006" />
                               <Label layoutX="77.0" layoutY="14.0" text="Films Management" />
                               <Label layoutX="56.0" layoutY="66.0" text="Title" AnchorPane.rightAnchor="177.0" />
-                              <TextArea fx:id="films_description" layoutX="14.0" layoutY="106.0" prefHeight="253.0" prefWidth="228.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <TextArea fx:id="films_description" layoutX="14.0" layoutY="106.0" prefHeight="253.0" prefWidth="228.0" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                               <Label layoutX="14.0" layoutY="88.0" text="Description:" AnchorPane.rightAnchor="178.8" />
                               <Label layoutX="28.0" layoutY="375.0" text="Runtime:" AnchorPane.rightAnchor="177.0" />
                               <Label layoutX="39.0" layoutY="410.0" text="Genre:" AnchorPane.rightAnchor="177.0" />
                               <Label layoutX="2.0" layoutY="444.0" text="Age restrictions:" />
                               <Label layoutX="18.0" layoutY="482.0" text="Language:" AnchorPane.rightAnchor="177.0" />
                               <TextField fx:id="films_language" layoutX="92.0" layoutY="478.0" />
-                              <Button fx:id="films_insertBtn" layoutX="28.0" layoutY="549.0" mnemonicParsing="false" onAction="#insertMovie" prefHeight="26.0" prefWidth="66.0" text="Insert" AnchorPane.leftAnchor="14.0" />
-                              <Button fx:id="films_updateBtn" layoutX="95.0" layoutY="549.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Update" />
-                              <Button fx:id="films_deleteBtn" layoutX="172.0" layoutY="549.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Delete" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="films_insertBtn" layoutX="28.0" layoutY="549.0" mnemonicParsing="false" onAction="#insertMovie" prefHeight="26.0" prefWidth="66.0" text="Insert" AnchorPane.bottomAnchor="96.6" AnchorPane.leftAnchor="14.0" />
+                              <Button fx:id="films_updateBtn" layoutX="95.0" layoutY="549.0" mnemonicParsing="false" onAction="#upDateMovie" prefHeight="26.0" prefWidth="66.0" text="Update" />
+                              <Button fx:id="films_deleteBtn" layoutX="172.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="26.0" prefWidth="66.0" text="Delete" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="films_clearBtn" layoutX="175.0" layoutY="596.0" mnemonicParsing="false" onAction="#clearTextFields" prefWidth="66.0" text="Clear" />
                            </children>
                         </AnchorPane>
@@ -117,6 +118,59 @@
                                 </columns>
                               </TableView>
                               <Button fx:id="films_refresh" layoutX="697.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshFilmsTable" text="Refresh" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="rooms_form" prefHeight="700.0" prefWidth="1060.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="24.0" layoutY="14.0" prefHeight="668.0" prefWidth="256.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <Label layoutX="76.0" layoutY="38.0" text="Rooms Managment" AnchorPane.topAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="314.0" layoutY="102.0" prefHeight="672.0" prefWidth="764.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <TableView layoutX="16.0" layoutY="83.0" prefHeight="575.0" prefWidth="736.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="83.0">
+                                <columns>
+                                  <TableColumn prefWidth="150.93338012695312" text="Room Number" />
+                                  <TableColumn prefWidth="133.86676025390625" text="Number of seats" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="screening_form" prefHeight="700.0" prefWidth="1060.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="94.0" layoutY="66.0" prefWidth="256.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <Label layoutX="65.0" layoutY="14.0" text="Screening Management" AnchorPane.topAnchor="14.0" />
+                              <DatePicker fx:id="screening_datePicker" layoutX="65.0" layoutY="72.0" prefHeight="26.0" prefWidth="176.0" AnchorPane.rightAnchor="13.0" />
+                              <Label layoutX="25.0" layoutY="76.0" text="Date" AnchorPane.leftAnchor="14.0" />
+                              <TextField fx:id="screening_hour" alignment="CENTER" layoutX="65.0" layoutY="117.0" prefHeight="26.0" prefWidth="176.0" promptText="HH : MM" AnchorPane.rightAnchor="14.0" />
+                              <Label layoutX="13.0" layoutY="122.0" text="Hour" AnchorPane.leftAnchor="14.0" />
+                              <TextField fx:id="screening_film" layoutX="65.0" layoutY="162.0" prefWidth="176.0" AnchorPane.rightAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="166.0" text="Film" AnchorPane.leftAnchor="14.0" />
+                              <Button fx:id="screening_insertBtn" layoutX="17.0" layoutY="544.0" mnemonicParsing="false" prefWidth="66.0" text="Insert" AnchorPane.bottomAnchor="96.6" AnchorPane.leftAnchor="14.0" />
+                              <Button fx:id="screening_UpdateBtn" layoutX="98.0" layoutY="550.0" mnemonicParsing="false" prefWidth="66.0" text="Update" />
+                              <Button fx:id="screening_DeleteBtn" layoutX="180.0" layoutY="550.0" mnemonicParsing="false" prefWidth="66.0" text="Delete" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="screening_clearBtn" layoutX="183.0" layoutY="586.0" mnemonicParsing="false" prefWidth="66.0" text="Clear" AnchorPane.rightAnchor="14.0" />
+                              <TextField layoutX="67.0" layoutY="207.0" prefWidth="176.0" />
+                              <Label layoutX="14.0" layoutY="211.0" text="Room" AnchorPane.leftAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="282.0" layoutY="14.0" prefHeight="200.0" prefWidth="763.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <TableView fx:id="screening_table" layoutX="132.0" layoutY="78.0" prefHeight="602.0" prefWidth="200.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                <columns>
+                                  <TableColumn fx:id="screening_id_col" prefWidth="75.0" text="ID" />
+                                  <TableColumn fx:id="screening_dateTime_col" prefWidth="195.19996643066406" text="Date Time" />
+                                    <TableColumn fx:id="screening_film_col" prefWidth="232.0" text="Film" />
+                                    <TableColumn fx:id="screening_room_col" prefWidth="75.0" text="Room" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="screening_refreshBtn" layoutX="635.0" layoutY="14.0" mnemonicParsing="false" text="Refresh" AnchorPane.rightAnchor="14.0" />
                            </children>
                         </AnchorPane>
                      </children>

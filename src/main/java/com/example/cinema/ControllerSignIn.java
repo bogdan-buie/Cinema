@@ -55,7 +55,6 @@ public class ControllerSignIn {
         window.setResizable(false);
         window.setScene(new Scene(root, 1200, 700));
     }
-
     public void SignInDb() {
         try {
             String email = SignInEmail_tf.getText();
@@ -88,7 +87,7 @@ public class ControllerSignIn {
                     dataEmail = email;
                     openAdminInterface();
 
-                } else if (messageFromDB.equals("Logare invalida!")) {
+                } else if (messageFromDB.equals("Date de logare incorecte!")) {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
