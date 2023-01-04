@@ -1,7 +1,7 @@
 package com.example.cinema;
 /**
- * @author Buie Bogdan
  * Reprezinta un user al aplicatiei fie admin, fie user obisnuit
+ * @author Buie Bogdan
  */
 public class User {
     private String email;
@@ -12,23 +12,50 @@ public class User {
      */
     private int isAdmin;
 
+    /**
+     * Returneaza emailul
+     * @return un string
+     */
     public String getEmail(){
         return this.email;
     }
+
+    /**
+     * Seteaza emailul
+     * @param email o variabila de tip String
+     */
     public void setEmail(String email){
         this.email = email;
     }
 
+    /**
+     * Returneaza parola
+     * @return un String
+     */
     public String getPassword(){
         return this.password;
     }
+
+    /**
+     * Seteaza parola
+     * @param password o variabila de tip String
+     */
     public void setPassword(String password){
         this.password = password;
     }
 
+    /**
+     * Returneaza tipul utilizatorului
+     * @return un nr de tip intreg
+     */
     public int getIsAdmin() {
         return isAdmin;
     }
+
+    /**
+     * Seteaza tipul utilizatorului
+     * @param type un nr de tip intreg
+     */
     public void setIsAdmin(int type) {
         this.isAdmin = type;
     }

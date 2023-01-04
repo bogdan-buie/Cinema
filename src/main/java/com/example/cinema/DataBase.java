@@ -5,7 +5,13 @@ import javafx.collections.ObservableList;
 
 import javax.net.ssl.SSLException;
 import java.sql.*;
+import java.util.DoubleSummaryStatistics;
 
+/**
+ * Clasa care comunica cu baza de date
+ * @author Buie Bogdan
+ * @author Vancea Bogdan
+ */
 public class DataBase {
 
     final String DB_URL = "jdbc:mysql://localhost/proiect_cinema?serverTimezone=UTC";
@@ -28,6 +34,12 @@ public class DataBase {
         }
     }
 
+    /**
+     * Verifica daca uitlizatorul are cont
+     * @param email un String, reprezentand email-ul utilizatorului
+     * @param password un String, reprezentand parola utilizatoruli
+     * @return un String, reprezentand mesajul venit din baza de date
+     */
     public String login(String email, String password) {
         // functie care verifica daca un user/admin se afla in baza de date
         try {
@@ -53,6 +65,12 @@ public class DataBase {
         return "Eroare DB login";
     }
 
+    /**
+     * Înregistrează un nou utilizator in baza de date
+     * @param email un String, reprezentand emailul noului utilizator
+     * @param password un String, reprezentand parola noului utilizator
+     * @return un String, reprezentand measjul venit din baza de date
+     */
     public String register(String email, String password) {
         try {
             String sql = "{CALL inregistrare(?,?)}";
@@ -75,6 +93,10 @@ public class DataBase {
         return "Eroare DB register";
     }
 
+    /**
+     * Preia lista de filme din baza de date
+     * @return un obiect de tipul ObservableList, continand toate filmele furnizate de baza de date
+     */
     public ObservableList<Movie> getListOfMoviesDB() {
         ObservableList<Movie> list = FXCollections.observableArrayList();
         try {
@@ -99,20 +121,26 @@ public class DataBase {
         }
         return list;
     }
-    public ObservableList<Screening> getListOfScreeingDB() {
+
+    /**
+     * Preia lista de ecranizari din baza de date
+     * @return un obiect de tipul ObservableList, continand toate ecranizarile furnizate de baza de date
+     */
+    public ObservableList<Screening> getListOfScreeningDB() {
         ObservableList<Screening> list = FXCollections.observableArrayList();
         try {
-            String sql = "SELECT * FROM ecranizare";
+            String sql = "SELECT ecranizare.id, ecranizare.data_rulare, film.titlu AS titlu, ecranizare.idsala FROM ecranizare RIGHT JOIN film ON ecranizare.idfilm = film.id;";
             // sau prepareCall
             prepare = connect.prepareStatement(sql);
             result = prepare.executeQuery();
             Screening screening;
             while (result.next()) {
                 screening = new Screening(result.getInt("id"),
-                                          result.getString("data_rulare"),            /// atentie aici la tip
-                                          result.getInt("idfilm"),
+                                          result.getString("data_rulare"),
+                                          result.getString("titlu"),
                                           result.getInt("idsala")
                                          );
+                System.out.println(result.getString("titlu"));
                 list.add(screening);
             }
         } catch (SQLException e) {
@@ -121,6 +149,11 @@ public class DataBase {
         return list;
     }
 
+    /**
+     * Insereaza un film în baza de date
+     * @param movie un obiect de tip Movie
+     * @return un String, reprezentand measjul venit din baza de date
+     */
     public int insertMovieDB(Movie movie) {
         int code = -1;
         /*
@@ -161,6 +194,11 @@ public class DataBase {
         return code;
     }
 
+    /**
+     * Sterge din baza de date filmul trimis ca parametru
+     * @param movie un obiect de tip Movie
+     * @return un String, reprezentand measjul venit din baza de date
+     */
     public int deleteMovieBD(Movie movie) {
         int code = -1;
         /*
@@ -183,6 +221,10 @@ public class DataBase {
         return code;
     }
 
+    /**
+     * Numara filmele din baza de date
+     * @return un numar de tip intreg, reprezentand nr de filme sau o posibila eroare
+     */
     public int countAvailableFilmsDB() {
         int code = -1;
         /*
@@ -205,6 +247,11 @@ public class DataBase {
         return code;
     }
 
+    /**
+     * Face update in baza de date la filmul trimis ca parametru
+     * @param movie un obiect de tip film
+     * @return un nr de tip intreg, reprezentand un cod legat de status-ul acestei operatii
+     */
     public int updateMovieDB(Movie movie) {
         int code = -1;
         /*
@@ -235,6 +282,12 @@ public class DataBase {
         return code;
     }
 
+    /**
+     * Insereaza in baza de date locuri pentru o anumita sala
+     * @param nrLocuri un numar intreg, reprezentand numarul de locuri
+     * @param idSala un numar intreg, reprezentand numarul salii
+     * @author Vancea Bogdan
+     */
     public void InsertLoc(int nrLocuri, String idSala) {
         try {
             int i = 1;
@@ -253,6 +306,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Identifica id-ul din baza de date al filmului dat ca parametru
+     * @param titlu un String, reprezentand numele filmului dat
+     * @return un numar intreg reprezentand id-ul filmului
+     */
     public String getIDFilm(String titlu) {
         String id = new String();
         try {
@@ -264,14 +322,18 @@ public class DataBase {
             while (resultSet.next()) {
                 id = resultSet.getString("id");
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return id;
     }
 
+    /**
+     * Insereaza o ecranizare in baza de date
+     * @param data_rulare un String, reprezentand data de rulare al filmului dat
+     * @param idFilm un numar intreg reprezentand, id-ul filmului selectat
+     * @param idSala un numar intreg reprezentand, id-ul sali in care se tine sala
+     */
     public void InsertEcranizare(String data_rulare, String idFilm, int idSala) {
         try {
             CallableStatement stm = connect.prepareCall("INSERT INTO ecranizare (data_rulare,idfilm,idsala) VALUES(?,?,?)");
@@ -283,17 +345,5 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getDB_URL() {
-        return DB_URL;
-    }
-
-    public String getUSERNAME() {
-        return USERNAME;
-    }
-
-    public String getPASSWORD() {
-        return PASSWORD;
     }
 }

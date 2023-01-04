@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clasa controller al ferestrei SignUp
+ * @author Buie Bogdan
+ */
 public class ControllerSignUp {
 
     @FXML   // Already have an account? Log in
@@ -33,6 +37,11 @@ public class ControllerSignUp {
     @FXML
     private AnchorPane SignUp_form;
     private User user;
+
+    /**
+     * Interschimba fereastra curenta cu cea de SignIn
+     * @throws IOException
+     */
     @FXML   // trecem pe formularul de SignIn
     public void handleSignInHaveAccount_hlnk() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
@@ -41,6 +50,9 @@ public class ControllerSignUp {
         window.setScene(new Scene(root, 700, 500));
     }
 
+    /**
+     * Inregistreaza utilizatorul in baza de date
+     */
     public void RegisterDb() {
         try {
             String email = SignUpEmail_tf.getText();

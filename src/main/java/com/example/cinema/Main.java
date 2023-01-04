@@ -7,15 +7,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clasa principala
+ * @author Buie Bogdan
+ */
 public class Main extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
+        /*
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Scene scene = new Scene(root, 700,500);
         stage.setTitle("Sign In");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        */
+
+        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        primaryStage.setTitle("Cinema");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
 
         //DataBase DB = new DataBase();
         //DB.connectToDB();

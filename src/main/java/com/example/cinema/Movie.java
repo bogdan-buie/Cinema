@@ -14,6 +14,7 @@ public class Movie {
     private String genre;
     private String ageRestrictions;
     private String language;
+    private String imgsrc;
 
     /**
      * Constructorul clasei

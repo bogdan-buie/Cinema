@@ -170,7 +170,7 @@
                                     <TableColumn fx:id="screening_room_col" prefWidth="75.0" text="Room" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="screening_refreshBtn" layoutX="635.0" layoutY="14.0" mnemonicParsing="false" text="Refresh" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="screening_refreshBtn" layoutX="635.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshScreeningTable" text="Refresh" AnchorPane.rightAnchor="14.0" />
                            </children>
                         </AnchorPane>
                      </children>

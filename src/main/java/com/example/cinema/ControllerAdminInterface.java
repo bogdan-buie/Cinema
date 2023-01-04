@@ -21,7 +21,6 @@ import static com.example.cinema.Data.dataEmail;
  * Clasa controller al ferestrei AdminInterface
  * @author Buie Bogdan
  */
-
 public class ControllerAdminInterface {
 
     @FXML
@@ -159,12 +158,18 @@ public class ControllerAdminInterface {
     private ObservableList<Movie> movieList;
     private ObservableList<Screening> screeingList;
 
+    /**
+     * Preia lista de filme din baza de date
+     */
     public void getListOfMovies() {
         DataBase DB = new DataBase();
         DB.connectToDB();
         this.movieList = DB.getListOfMoviesDB();
     }
 
+    /**
+     * Afiseaza lista de filme in tabel cu filme
+     */
     public void showMovieList() {
         //minut 1:35:00
         films_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -177,6 +182,9 @@ public class ControllerAdminInterface {
         films_table.setItems(movieList);
     }
 
+    /**
+     * Selecteaza o inregistrare din tabelul cu filme
+     */
     public void selectMovie() {
         // cand selectam un rand din tabel informatiile se muta in textfield-uri
         Movie selectedMovie = films_table.getSelectionModel().getSelectedItem();
@@ -192,6 +200,9 @@ public class ControllerAdminInterface {
         films_language.setText(selectedMovie.getLanguage());
     }
 
+    /**
+     * Insereaza un film in baza de date cu datele introduse in textfield-uri
+     */
     public void insertMovie() {
         String title = films_title.getText();
         String description = films_description.getText();
@@ -205,7 +216,7 @@ public class ControllerAdminInterface {
             System.out.println(movieForInsert.getTitle() + movieForInsert.getRuntime());
 
             DataBase DB = new DataBase();
-            DB.connectToDB();                           /// NU UITA DE ASTA
+            DB.connectToDB();
             int code = DB.insertMovieDB(movieForInsert);
 
             if (code == -1) {
@@ -240,6 +251,9 @@ public class ControllerAdminInterface {
 
     }
 
+    /**
+     * Sterge din baza de date inregistrarea selectata in tabelul cu filme al aplicatiei
+     */
     public void deleteMovie() {
         DataBase DB = new DataBase();
         DB.connectToDB();
@@ -254,14 +268,24 @@ public class ControllerAdminInterface {
             Movie movieForDelete = new Movie(title, description, runtime, genre, ageRestriction, language);
             int code;
             alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Are you sure you want to delete the movie?");
             Optional<ButtonType> option = alert.showAndWait();
-            if(ButtonType.OK.equals(option.get())){
+            if (ButtonType.OK.equals(option.get())) {
                 code = DB.deleteMovieBD(movieForDelete);            /// de tratat celelalte cazuri
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Succesfully delete!");
-                alert.showAndWait();
+                if (code == 1) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Succesfully delete!");
+                    alert.showAndWait();
+                }
+                else if (code == -1){
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error when deleting movies");
+                    alert.showAndWait();
+                }
             } else {
                 return;
             }
@@ -278,7 +302,11 @@ public class ControllerAdminInterface {
         showMovieList();
         clearTextFields();
     }
-    public void upDateMovie(){
+
+    /**
+     * Updateaza o inregistare din baza de date corespunzatoare celei din tabelul cu filme
+     */
+    public void upDateMovie() {
         String title = films_title.getText();
         String description = films_description.getText();
         String runtime = films_runtime.getText();
@@ -287,7 +315,7 @@ public class ControllerAdminInterface {
         String language = films_language.getText();
         Alert alert;
 
-        if (title.isEmpty() || description.isEmpty() || runtime.isEmpty() || genre.isEmpty() || ageRestriction.isEmpty() || language.isEmpty()){
+        if (title.isEmpty() || description.isEmpty() || runtime.isEmpty() || genre.isEmpty() || ageRestriction.isEmpty() || language.isEmpty()) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -299,7 +327,7 @@ public class ControllerAdminInterface {
             DataBase DB = new DataBase();
             DB.connectToDB();
             code = DB.updateMovieDB(movieForUpdate);
-            if(code == -1){
+            if (code == -1) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -324,10 +352,17 @@ public class ControllerAdminInterface {
             }
         }
     }
+
+    /**
+     * Arata email-ul cu care ne-am logat in aplicatie
+     */
     public void displayEmailLabel() {
         usernameTextField.setText(dataEmail);
     }
 
+    /**
+     * Sterge continutul din toate textfield-urile pagini de filme
+     */
     public void clearTextFields() {
         films_title.setText("");
         films_description.setText("");
@@ -336,25 +371,49 @@ public class ControllerAdminInterface {
         films_ageRestriction.setText("");
         films_language.setText("");
     }
+
+    /**
+     * Preia din baza de date toate inregistrarile aferente filmului
+     */
     public void refreshFilmsTable() {
         getListOfMovies();
         showMovieList();
     }
     /////////////////// SCREENING
-    public void getListOfScreening(){
+
+    /**
+     * Preia din baza de date toate inregistrarile cu ecranizarile
+     */
+    public void getListOfScreening() {
         DataBase DB = new DataBase();
         DB.connectToDB();
-        this.screeingList = DB.getListOfScreeingDB();
+        this.screeingList = DB.getListOfScreeningDB();
     }
+
+    /**
+     * Afiseaza inregitrarile in tabelul cu ecranizari
+     */
     public void showScreeningList() {
         screening_id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
         screening_dateTime_col.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
-        screening_film_col.setCellValueFactory(new PropertyValueFactory<>("id_film"));
+        screening_film_col.setCellValueFactory(new PropertyValueFactory<>("film"));
         screening_room_col.setCellValueFactory(new PropertyValueFactory<>("id_sala"));
 
         screening_table.setItems(screeingList);
 
     }
+
+    /**
+     * Preia din baza de date toate inregistrarile aferente ecranizarii
+     */
+    public void refreshScreeningTable() {
+        getListOfScreening();
+        showScreeningList();
+    }
+
+    /**
+     * afiseaza pagina pentru management-ul filmelor
+     */
     public void viewFilmsForm() {
         dasboard_form.setVisible(false);
         films_form.setVisible(true);
@@ -363,6 +422,9 @@ public class ControllerAdminInterface {
         //de completat cu celelalte
     }
 
+    /**
+     * afiseaza pagina dashboard
+     */
     public void viewDashboardForm() {
         dasboard_form.setVisible(true);
         films_form.setVisible(false);
@@ -371,19 +433,31 @@ public class ControllerAdminInterface {
         //de completat cu celelalte
         setAvailableFilms();
     }
-    public void viewRoomsForm(){
+
+    /**
+     * afiseaza pagina pentru management-ul salilor
+     */
+    public void viewRoomsForm() {
         dasboard_form.setVisible(false);
         films_form.setVisible(false);
         rooms_form.setVisible(true);
         screening_form.setVisible(false);
     }
-    public void viewScreeningForm(){
+
+    /**
+     * afiseaza pagina pentru management-ul ecranizarilor
+     */
+    public void viewScreeningForm() {
         rooms_form.setVisible(false);
         dasboard_form.setVisible(false);
         films_form.setVisible(false);
         screening_form.setVisible(true);
     }
-    public void setAvailableFilms(){
+
+    /**
+     * Calculeaza si afiseaza in dashboard nr de filme disponibile la cinema
+     */
+    public void setAvailableFilms() {
         // calculeaza nr de filme disponibile
         DataBase DB = new DataBase();
         DB.connectToDB();
@@ -391,6 +465,12 @@ public class ControllerAdminInterface {
         String nrOfFilmsString = String.valueOf(nrOfFilms);
         dashboard_availableMovies.setText(nrOfFilmsString);
     }
+
+    /**
+     * Inchide fereastra adminului si deschide fereastra de Sign In
+     *
+     * @throws IOException
+     */
     public void logOut() throws IOException {
         //signOutBtn.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
@@ -399,6 +479,10 @@ public class ControllerAdminInterface {
         window.setResizable(false);
         window.setScene(new Scene(root, 700, 500));
     }
+
+    /**
+     * Functia de initializarea a ferestrei adminului
+     */
     @FXML
     public void initialize() {
         displayEmailLabel();

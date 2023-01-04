@@ -17,6 +17,11 @@ import java.sql.Driver;
 
 import static com.example.cinema.Data.dataEmail;
 
+/**
+ * Clasa controller al ferestrei SignIn
+ * @author Buie Bogdan
+ */
+
 public class ControllerSignIn {
     @FXML
     private TextField SignInEmail_tf;
@@ -40,7 +45,10 @@ public class ControllerSignIn {
     private ResultSet result;
     private User user;
 
-
+    /**
+     * Ascunde ferestra SignIn si face vizibila fereastra de SignUp
+     * @throws IOException
+     */
     @FXML   // trecem pe formularul de SignUp
     public void handleSignInHaveAccount_hlnk() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
@@ -48,6 +56,10 @@ public class ControllerSignIn {
         window.setTitle("Sign Up");
         window.setScene(new Scene(root, 700, 500));
     }
+    /**
+     * Ascunde ferestra SignIn si face vizibila fereastra de administratorului
+     * @throws IOException
+     */
     public void openAdminInterface() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AdminInterface.fxml"));
         Stage window = (Stage) SignIn_btn.getScene().getWindow();
@@ -55,6 +67,27 @@ public class ControllerSignIn {
         window.setResizable(false);
         window.setScene(new Scene(root, 1200, 700));
     }
+    /**
+     * Ascunde ferestra SignIn si face vizibila fereastra de Userului
+     * @throws IOException
+     */
+    public void openUserInterface() throws IOException{
+        /*
+        Parent root = FXMLLoader.load(getClass().getResource("movie-view.fxml"));
+        Stage window = (Stage) SignIn_btn.getScene().getWindow();
+        window.setTitle("Cinema");
+        window.setScene(new Scene(root));
+
+         */
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        Parent root2= (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.show();
+    }
+    /**
+     * Logheaza in aplicatie utilizatorul. In functie de tipul de utilizator i se deschide fereastra destinata lui
+     */
     public void SignInDb() {
         try {
             String email = SignInEmail_tf.getText();
@@ -78,6 +111,7 @@ public class ControllerSignIn {
                     alert.setHeaderText(null);
                     alert.setContentText("Succesfully Login!");
                     alert.showAndWait();
+                    openUserInterface();
                 }else if (messageFromDB.equals("Logat cu succes ca administrator!")) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Message");
