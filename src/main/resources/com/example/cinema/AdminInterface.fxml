@@ -31,7 +31,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="dasboard_form" prefHeight="700.0" prefWidth="860.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="dasboard_form" prefHeight="700.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="23.0" layoutY="19.0" prefHeight="188.0" prefWidth="1022.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="498.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                            <children>
@@ -42,7 +42,7 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="dashboard_ScreeningToday" layoutX="202.0" layoutY="23.0" text="1500" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
+                                    <Label fx:id="dashboard_ScreeningToday" layoutX="202.0" layoutY="23.0" text="5" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="23.0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -141,7 +141,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="screening_form" prefHeight="700.0" prefWidth="1060.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="screening_form" prefHeight="700.0" prefWidth="1060.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="94.0" layoutY="66.0" prefWidth="256.0" styleClass="bg-white" stylesheets="@AdminInterface.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                            <children>
