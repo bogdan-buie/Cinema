@@ -1,0 +1,169 @@
+CREATE SCHEMA `proiect_cinema` ;
+
+CREATE TABLE `film`(
+id int NOT NULL AUTO_INCREMENT,
+titlu varchar(50),
+descriere varchar(200),
+durata varchar(4),
+gen varchar(50),
+clasificare varchar(20),
+limba_dublare varchar(20),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE `sala`(
+id int NOT NULL,
+numar_locuri int,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE `loc`(
+id int NOT NULL AUTO_INCREMENT,
+idsala int,
+rand int,
+numar_loc int,
+PRIMARY KEY (id),
+CONSTRAINT idsala_fk_l FOREIGN KEY (idsala) 
+REFERENCES sala(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+
+
+CREATE TABLE `ecranizare`(
+id int NOT NULL AUTO_INCREMENT,
+data_rulare DATETIME,
+idfilm int,
+idsala int,
+PRIMARY KEY (id),
+CONSTRAINT idsala_fk_e FOREIGN KEY (idsala)
+REFERENCES sala(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+CONSTRAINT idfilm_fk_e FOREIGN KEY (idfilm)
+REFERENCES film(id)
+ON UPDATE CASCADE
+ON DELETE RESTRICT
+);
+
+
+CREATE TABLE `user`(
+id int NOT NULL AUTO_INCREMENT,
+email varchar(50),
+parola_hash varchar(80),
+administrator tinyint,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE `rezervare`(
+id int NOT NULL AUTO_INCREMENT,
+user_email varchar(50),
+idecranizare int,
+idloc int,
+platit tinyint,
+PRIMARY KEY(id),
+CONSTRAINT userid_fk FOREIGN KEY (user_id)
+REFERENCES user(id)
+ON UPDATE CASCADE
+ON DELETE NO ACTION,
+CONSTRAINT idecranizare_fk FOREIGN KEY (idecranizare)
+REFERENCES ecranizare(id)
+ON UPDATE NO ACTION
+ON DELETE NO ACTION,
+CONSTRAINT idloc_fk FOREIGN KEY (idloc)
+REFERENCES loc(id)
+ON UPDATE CASCADE
+ON DELETE NO ACTION
+
+);
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `filtru_gen`(in genx varchar(20))
+BEGIN
+SELECT * FROM filme where gen like genx;
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `inregistrare`(in emailx varchar(50),in parolax varchar(80))
+BEGIN
+
+IF exists (SELECT email FROM `user` where email=emailx) THEN
+	set @mesaj:='Exista deja un cont cu acest email';
+ELSE 
+	INSERT INTO `user` (email,parola_hash) 
+    VALUES (emailx,sha(parolax));
+    set @mesaj:='Contul a fost creat cu succes';
+END IF;
+SELECT @mesaj;
+
+END
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login`(in emailx varchar(50),in parolax varchar(80))
+BEGIN
+IF EXISTS(SELECT email FROM `user` WHERE email=emailx)
+THEN 
+	set @verific:=(SELECT email FROM `user` WHERE parola_hash=sha(parolax) AND email=emailx);
+    
+    IF (@verific IS NOT NULL)
+		THEN 
+			IF (SELECT administrator from `user` where email=emailx IS TRUE) 
+				THEN
+					set @mesaj='Logat cu succes ca administrator!';
+				ELSE
+					set @mesaj='Logat cu succes!';
+			END IF;
+           
+	ELSE 		
+			set @mesaj='Date de logare incorecte!';
+	END IF;
+ELSE 
+ set @mesaj='Logare invalida!';
+END IF;
+
+SELECT @mesaj;
+
+END
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ora_rulare`(IN idx INT)
+BEGIN
+	SELECT time(ecranizare.data_rulare),date(ecranizare.data_rulare) FROM ecranizare
+     JOIN filme ON ecranizare.idfilm=filme.id
+     WHERE filme.id=idx;
+END
+
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `program` AS
+    SELECT 
+        `proiect_cinema`.`ecranizare`.`data_rulare` AS `data_rulare`,
+        `proiect_cinema`.`filme`.`titlu` AS `titlu`,
+        `proiect_cinema`.`sala`.`id` AS `sala`
+    FROM
+        ((`ecranizare`
+        JOIN `filme` ON (`proiect_cinema`.`ecranizare`.`idfilm` = `proiect_cinema`.`filme`.`id`))
+        JOIN `sala` ON (`proiect_cinema`.`ecranizare`.`idsala` = `proiect_cinema`.`sala`.`id`))
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ora_rulare`(IN idx INT)
+BEGIN
+	SELECT time(ecranizare.data_rulare),date(ecranizare.data_rulare) FROM ecranizare
+     JOIN filme ON ecranizare.idfilm=filme.id
+     WHERE filme.id=idx;
+END
+
+ALTER TABLE loc 
+ADD CONSTRAINT uq_loc UNIQUE(idsala,numar_loc)
+
+
+ALTHER TABLE ecranizare
+ADD CONSTRAINT uq_ecranizare UNIQUE(data_rulare,idfilm,idsala)
+
+
