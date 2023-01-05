@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TicketContoller">
+   <children>
+      <BorderPane fx:id="totalPrice" layoutY="20.0" prefHeight="700.0" prefWidth="900.0" styleClass="bg-forrm" stylesheets="@designpage.css" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+         <top>
+            <Label text="BUY TICKETS" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="40.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <left>
+            <VBox alignment="TOP_CENTER" prefHeight="415.0" prefWidth="227.0" style="-fx-background-color: black; -fx-background-radius: 20;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" left="10.0" top="30.0" />
+               </BorderPane.margin>
+               <children>
+                  <Label alignment="CENTER_RIGHT" text="DETAILS" textAlignment="CENTER" textFill="#ed5f10">
+                     <font>
+                        <Font name="Calibri Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Movie Name:" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="5.0" right="100.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="movieTicket" prefHeight="27.0" prefWidth="206.0" text="moviename" textFill="#ed5f10">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="200.0" text="Date:" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="dateTicket" prefHeight="27.0" prefWidth="198.0" text="moviedate" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="198.0" text="Time" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="timeTicket" prefHeight="27.0" prefWidth="196.0" text="movietime" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="198.0" text="Screen" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="screenTicket" prefHeight="27.0" prefWidth="197.0" text="moviescreen" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="199.0" text="Email" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="197.0" text="emailHere" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="198.0" text="Seats" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="196.0" text="seatsHere" textFill="#ed5f10">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="94.0" text="Adults" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="adultTickets" text="number" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="100.0" text="Childs" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="childsTickets" text="number" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="440.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="100.0" text="Seniors" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="seniorsTickets" text="number" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="468.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="100.0" text="Total" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="17.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="seniorsTickets1" text="totalPrice" textFill="#ed5f10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="224.0" prefWidth="456.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="300.0" left="20.0" top="130.0" />
+               </BorderPane.margin>
+               <children>
+                  <Label alignment="CENTER" text="SELECT TICKET" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="26.0" prefWidth="336.0">
+                     <VBox.margin>
+                        <Insets left="100.0" right="50.0" top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Quantity" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="90.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Price($)" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="479.0">
+                     <VBox.margin>
+                        <Insets left="10.0" right="100.0" top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Adult" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Spinner prefHeight="26.0" prefWidth="118.0">
+                           <HBox.margin>
+                              <Insets left="117.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <Label fx:id="priceAdultSelectedMovie" text="\$" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="90.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets left="10.0" right="100.0" top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Child" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Spinner prefHeight="26.0" prefWidth="118.0">
+                           <HBox.margin>
+                              <Insets left="118.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <Label fx:id="priceChildSelectedMovie" text="\$" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="90.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets left="10.0" right="100.0" top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Senior" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Spinner prefHeight="26.0" prefWidth="118.0">
+                           <HBox.margin>
+                              <Insets left="110.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <Label fx:id="priceSeniorSelectedMovie" text="\$" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="90.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <right>
+            <HBox alignment="CENTER" prefHeight="654.0" prefWidth="136.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="350.0" top="200.0" />
+               </BorderPane.margin>
+               <children>
+                  <Button fx:id="selectSeats" mnemonicParsing="false" prefHeight="32.0" prefWidth="124.0" style="-fx-background-color: white;" text="Select SEATS" textFill="#ed5f10">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </right>
+         <bottom>
+            <Button fx:id="purchase" mnemonicParsing="false" prefHeight="54.0" prefWidth="157.0" style="-fx-effect: dropshadow(three-pass-box, rgba(776, 99,9,999), 50, 0, 0, 0); -fx-background-color: red;" text="PURCHASE" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="50.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font name="Cambria Bold" size="23.0" />
+               </font>
+            </Button>
+         </bottom></BorderPane>
+   </children>
+</AnchorPane>

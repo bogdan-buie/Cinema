@@ -1,0 +1,12 @@
+.bg-forrm{
+   -fx-background-color:linear-gradient(to top right, #1e242e, #ed5f10);
+}
+.roundedCorner
+{
+   -fx-background-radius: 30;
+   -fx-effect: dropshadow(three-pass-box, rgba(776, 99,9,999), 20, 0, 4, 0);
+}
+.color{
+   -fx-text-fill: #010101;
+   -fx-font-size: 12;
+}

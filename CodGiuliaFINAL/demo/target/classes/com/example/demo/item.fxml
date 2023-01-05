@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane onMousePressed="#click" prefHeight="199.0" prefWidth="202.0" styleClass="roundedCorner" stylesheets="@designpage.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ItemController">
+   <children>
+      <VBox layoutX="128.0" layoutY="8.0" prefHeight="209.0" prefWidth="107.0" style="-fx-background-color: white;" styleClass="bg-forrm" stylesheets="@designpage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="title" prefHeight="32.0" prefWidth="112.0" text="Title" textFill="#d13b00">
+               <VBox.margin>
+                  <Insets left="5.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="classification" prefHeight="26.0" prefWidth="101.0" text="Classification" textFill="#6b1a1a">
+               <VBox.margin>
+                  <Insets left="5.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="genre" prefHeight="27.0" prefWidth="96.0" text="Genre" textFill="#5b570d">
+               <VBox.margin>
+                  <Insets left="5.0" top="25.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="8.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" styleClass="bg-forrm" stylesheets="@designpage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="98.6" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="img" fitHeight="266.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/0.jpg" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
